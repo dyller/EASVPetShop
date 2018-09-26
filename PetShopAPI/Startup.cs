@@ -51,17 +51,17 @@ namespace PetShopAPI
                 opt => opt.UseInMemoryDatabase("ThaDB")
                 );*/
 
-            /*if (_env.IsDevelopment())
+            if (_env.IsDevelopment())
             {
                 services.AddDbContext<PetShopAppContext>(
                     opt => opt.UseSqlite("Data Source=customerApp.db"));
             }
             else if (_env.IsProduction())
-            {*/
+            {
                 services.AddDbContext<PetShopAppContext>(
                     opt => opt
-                        .UseSqlServer("Data Source=tcp:easvpetshopapp.database.windows.net,1433;Initial Catalog=petshopApp;User Id=jacob@easvpetshopapp.database.windows.net;Password=Dyrvig123;"));
-            //}
+                        .UseSqlServer(_conf.GetConnectionString("defaultConnection")));
+            }
 
             services.AddScoped<IOwnerRepository, SQLOwnerRepository>();
             services.AddScoped<IOwnerService, OwnerService>();
@@ -80,7 +80,7 @@ namespace PetShopAPI
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
         public void Configure(IApplicationBuilder app, IHostingEnvironment env)
         {
-           /* if (env.IsDevelopment())
+            if (env.IsDevelopment())
             {
                 app.UseDeveloperExceptionPage();
                 using (var scope = app.ApplicationServices.CreateScope())
@@ -97,12 +97,6 @@ namespace PetShopAPI
                     ctx.Database.EnsureCreated();
                 }
                 app.UseHsts();
-            }*/
-
-            using (var scope = app.ApplicationServices.CreateScope())
-            {
-                var ctx = scope.ServiceProvider.GetService<PetShopAppContext>();
-                ctx.Database.EnsureCreated();
             }
 
             //app.UseHttpsRedirection();
