@@ -20,9 +20,22 @@ namespace PetApp.Infrastructure.SQLRepositorie
         }
         public Owner Create(Owner owner)
         {
-            _ptx.Owner.Add(owner);
+            List<Pet> pets = new List<Pet>();
+            foreach (var item in owner.pets)
+            {
+
+
+                if (item.ID == null && item.ID > 0)
+                {
+                    pets.Add (_ptx.Pet
+                   .FirstOrDefault(c => c.ID == item.ID));
+                }
+            }
+            owner.pets = pets;
+            var greatePet = _ptx.Owner.Add(owner).Entity;
             _ptx.SaveChanges();
-            return owner;
+            return greatePet;
+
         }
 
         public Owner Delete(int id)

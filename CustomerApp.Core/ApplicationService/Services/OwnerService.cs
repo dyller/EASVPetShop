@@ -18,6 +18,7 @@ namespace CustomerApp.Core.ApplicationService.Services
 
         public Owner AddOwner(Owner owner)
         {
+           
             return _ownerRepo.Create(owner);
         }
 
