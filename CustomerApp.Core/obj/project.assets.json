@@ -703,11 +703,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\jacob\\Desktop\\PetShop\\CustomerApp.Core\\CustomerApp.Core.csproj",
+      "projectUniqueName": "C:\\Users\\jacob\\Desktop\\EASVPetShop\\CustomerApp.Core\\CustomerApp.Core.csproj",
       "projectName": "CustomerApp.Core",
-      "projectPath": "C:\\Users\\jacob\\Desktop\\PetShop\\CustomerApp.Core\\CustomerApp.Core.csproj",
+      "projectPath": "C:\\Users\\jacob\\Desktop\\EASVPetShop\\CustomerApp.Core\\CustomerApp.Core.csproj",
       "packagesPath": "C:\\Users\\jacob\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\jacob\\Desktop\\PetShop\\CustomerApp.Core\\obj\\",
+      "outputPath": "C:\\Users\\jacob\\Desktop\\EASVPetShop\\CustomerApp.Core\\obj\\",
       "projectStyle": "PackageReference",
       "fallbackFolders": [
         "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder"
@@ -726,8 +726,8 @@
       "frameworks": {
         "netcoreapp2.1": {
           "projectReferences": {
-            "C:\\Users\\jacob\\Desktop\\PetShop\\petShop.Core.Entity\\petShop.Core.Entity.csproj": {
-              "projectPath": "C:\\Users\\jacob\\Desktop\\PetShop\\petShop.Core.Entity\\petShop.Core.Entity.csproj"
+            "C:\\Users\\jacob\\Desktop\\EASVPetShop\\petShop.Core.Entity\\petShop.Core.Entity.csproj": {
+              "projectPath": "C:\\Users\\jacob\\Desktop\\EASVPetShop\\petShop.Core.Entity\\petShop.Core.Entity.csproj"
             }
           }
         }

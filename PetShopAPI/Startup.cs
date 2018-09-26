@@ -24,55 +24,85 @@ using petShop.Core.Entity;
 namespace PetShopAPI
 {
     public class Startup
-    { 
-        public Startup(IConfiguration configuration)
+    {
+        /*public Startup(IConfiguration configuration)
         {
-            
             Configuration = configuration;
-            FAKEDB.InitData();
+        }*/
+        private IConfiguration _conf { get; }
 
+        private IHostingEnvironment _env { get; set; }
+
+        public Startup(IHostingEnvironment env)
+        {
+            _env = env;
+            var builder = new ConfigurationBuilder()
+                .SetBasePath(env.ContentRootPath)
+                .AddJsonFile("appsettings.json", optional: false, reloadOnChange: true)
+                .AddJsonFile($"appsettings.{env.EnvironmentName}.json", optional: true)
+                .AddEnvironmentVariables();
+            _conf = builder.Build();
         }
-
-        public IConfiguration Configuration { get; }
 
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-            services.AddDbContext<PetShopAppContext>(
-                opt => opt.UseSqlite("Data Source=customerApp.db"));
-            
-            services.AddScoped<IPetRepository1, SQLPetRepository>();
-            services.AddScoped<IPetService, PetService>();
+            /*services.AddDbContext<CustomerAppContext>(
+                opt => opt.UseInMemoryDatabase("ThaDB")
+                );*/
+
+            /*if (_env.IsDevelopment())
+            {
+                services.AddDbContext<PetShopAppContext>(
+                    opt => opt.UseSqlite("Data Source=customerApp.db"));
+            }
+            else if (_env.IsProduction())
+            {*/
+                services.AddDbContext<PetShopAppContext>(
+                    opt => opt
+                        .UseSqlServer("Data Source=tcp:easvpetshopapp.database.windows.net,1433;Initial Catalog=petshopApp;User Id=jacob@easvpetshopapp.database.windows.net;Password=Dyrvig123;"));
+            //}
 
             services.AddScoped<IOwnerRepository, SQLOwnerRepository>();
             services.AddScoped<IOwnerService, OwnerService>();
-            services.AddMvc().AddJsonOptions(options =>
-            {
-                options.SerializerSettings.ContractResolver
-                = new CamelCasePropertyNamesContractResolver();
+
+            services.AddScoped<IPetRepository1, SQLPetRepository>();
+            services.AddScoped<IPetService, PetService>();
+
+            services.AddMvc().AddJsonOptions(options => {
                 options.SerializerSettings.ReferenceLoopHandling = ReferenceLoopHandling.Ignore;
             });
 
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_1);
-          
+
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
         public void Configure(IApplicationBuilder app, IHostingEnvironment env)
         {
-            if (env.IsDevelopment())
+           /* if (env.IsDevelopment())
             {
                 app.UseDeveloperExceptionPage();
                 using (var scope = app.ApplicationServices.CreateScope())
                 {
                     var ctx = scope.ServiceProvider.GetService<PetShopAppContext>();
                     DBInitilizer.SeedDB(ctx);
-
                 }
             }
             else
             {
+                using (var scope = app.ApplicationServices.CreateScope())
+                {
+                    var ctx = scope.ServiceProvider.GetService<PetShopAppContext>();
+                    ctx.Database.EnsureCreated();
+                }
                 app.UseHsts();
+            }*/
+
+            using (var scope = app.ApplicationServices.CreateScope())
+            {
+                var ctx = scope.ServiceProvider.GetService<PetShopAppContext>();
+                ctx.Database.EnsureCreated();
             }
 
             //app.UseHttpsRedirection();

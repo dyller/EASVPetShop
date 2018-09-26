@@ -26,3 +26,17 @@ C:\Users\jacob\Desktop\PetShop\PetApp.Infrastructure\obj\Debug\netcoreapp2.1\Pet
 C:\Users\jacob\Desktop\PetShop\PetApp.Infrastructure\obj\Debug\netcoreapp2.1\PetApp.Infrastructure.csproj.CopyComplete
 C:\Users\jacob\Desktop\PetShop\PetApp.Infrastructure\obj\Debug\netcoreapp2.1\PetApp.Infrastructure.dll
 C:\Users\jacob\Desktop\PetShop\PetApp.Infrastructure\obj\Debug\netcoreapp2.1\PetApp.Infrastructure.pdb
+C:\Users\jacob\Desktop\EASVPetShop\PetApp.Infrastructure\bin\Debug\netcoreapp2.1\PetApp.Infrastructure.deps.json
+C:\Users\jacob\Desktop\EASVPetShop\PetApp.Infrastructure\bin\Debug\netcoreapp2.1\PetApp.Infrastructure.dll
+C:\Users\jacob\Desktop\EASVPetShop\PetApp.Infrastructure\bin\Debug\netcoreapp2.1\PetApp.Infrastructure.pdb
+C:\Users\jacob\Desktop\EASVPetShop\PetApp.Infrastructure\bin\Debug\netcoreapp2.1\CustomerApp.Core.dll
+C:\Users\jacob\Desktop\EASVPetShop\PetApp.Infrastructure\bin\Debug\netcoreapp2.1\petShop.Core.Entity.dll
+C:\Users\jacob\Desktop\EASVPetShop\PetApp.Infrastructure\bin\Debug\netcoreapp2.1\CustomerApp.Core.pdb
+C:\Users\jacob\Desktop\EASVPetShop\PetApp.Infrastructure\bin\Debug\netcoreapp2.1\petShop.Core.Entity.pdb
+C:\Users\jacob\Desktop\EASVPetShop\PetApp.Infrastructure\obj\Debug\netcoreapp2.1\PetApp.Infrastructure.csprojAssemblyReference.cache
+C:\Users\jacob\Desktop\EASVPetShop\PetApp.Infrastructure\obj\Debug\netcoreapp2.1\PetApp.Infrastructure.csproj.CoreCompileInputs.cache
+C:\Users\jacob\Desktop\EASVPetShop\PetApp.Infrastructure\obj\Debug\netcoreapp2.1\PetApp.Infrastructure.AssemblyInfoInputs.cache
+C:\Users\jacob\Desktop\EASVPetShop\PetApp.Infrastructure\obj\Debug\netcoreapp2.1\PetApp.Infrastructure.AssemblyInfo.cs
+C:\Users\jacob\Desktop\EASVPetShop\PetApp.Infrastructure\obj\Debug\netcoreapp2.1\PetApp.Infrastructure.csproj.CopyComplete
+C:\Users\jacob\Desktop\EASVPetShop\PetApp.Infrastructure\obj\Debug\netcoreapp2.1\PetApp.Infrastructure.dll
+C:\Users\jacob\Desktop\EASVPetShop\PetApp.Infrastructure\obj\Debug\netcoreapp2.1\PetApp.Infrastructure.pdb

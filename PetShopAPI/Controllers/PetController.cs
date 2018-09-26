@@ -23,8 +23,14 @@ namespace PetShopAPI.Controllers
         [HttpGet]
         public ActionResult<IEnumerable<Pet>> Get([FromQuery]Filter filter)
         {
-           
-            return _petService.GetFilteredPet(filter);
+            if (filter.CurrentPage <= 0 || filter.ItemsPrPage <= 0)
+            {
+                return _petService.GetAllPet();
+            }
+            else
+            {
+                return _petService.GetFilteredPet(filter);
+            }
         }
         
 
