@@ -17,7 +17,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CustomerApp.Core", "Custome
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "PetApp.Infrastructure", "PetApp.Infrastructure\PetApp.Infrastructure.csproj", "{E7D23D91-B2DA-4D85-8497-54C5BC6E00CC}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PetShopAPI", "PetShopAPI\PetShopAPI.csproj", "{8EF82F4E-32BC-4D87-A0B6-64359ED76FBD}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "PetShopAPI", "PetShopAPI\PetShopAPI.csproj", "{8EF82F4E-32BC-4D87-A0B6-64359ED76FBD}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

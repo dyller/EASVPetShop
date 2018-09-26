@@ -9,12 +9,17 @@ using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.HttpsPolicy;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Options;
+using Newtonsoft.Json;
+using Newtonsoft.Json.Serialization;
 using PetApp.Infrastructure;
 using PetApp.Infrastructure.Repository;
+using PetApp.Infrastructure.SQLRepositorie;
+using petShop.Core.Entity;
 
 namespace PetShopAPI
 {
@@ -33,11 +38,21 @@ namespace PetShopAPI
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-            services.AddScoped<IPetRepository1, PetRepository>();
+            services.AddDbContext<PetShopAppContext>(
+                opt => opt.UseSqlite("Data Source=customerApp.db"));
+            
+            services.AddScoped<IPetRepository1, SQLPetRepository>();
             services.AddScoped<IPetService, PetService>();
 
-            services.AddScoped<IOwnerRepository, OwnerRepository>();
-            services.AddScoped<IOwnerService, OwnerService>(); 
+            services.AddScoped<IOwnerRepository, SQLOwnerRepository>();
+            services.AddScoped<IOwnerService, OwnerService>();
+            services.AddMvc().AddJsonOptions(options =>
+            {
+                options.SerializerSettings.ContractResolver
+                = new CamelCasePropertyNamesContractResolver();
+                options.SerializerSettings.ReferenceLoopHandling = ReferenceLoopHandling.Ignore;
+            });
+
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_1);
           
         }
@@ -48,6 +63,12 @@ namespace PetShopAPI
             if (env.IsDevelopment())
             {
                 app.UseDeveloperExceptionPage();
+                using (var scope = app.ApplicationServices.CreateScope())
+                {
+                    var ctx = scope.ServiceProvider.GetService<PetShopAppContext>();
+                    DBInitilizer.SeedDB(ctx);
+
+                }
             }
             else
             {

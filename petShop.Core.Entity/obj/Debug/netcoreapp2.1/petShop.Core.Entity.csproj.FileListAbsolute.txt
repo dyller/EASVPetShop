@@ -15,3 +15,4 @@ C:\Users\jacob\Desktop\PetShop\petShop.Core.Entity\obj\Debug\netcoreapp2.1\petSh
 C:\Users\jacob\Desktop\PetShop\petShop.Core.Entity\obj\Debug\netcoreapp2.1\petShop.Core.Entity.AssemblyInfo.cs
 C:\Users\jacob\Desktop\PetShop\petShop.Core.Entity\obj\Debug\netcoreapp2.1\petShop.Core.Entity.dll
 C:\Users\jacob\Desktop\PetShop\petShop.Core.Entity\obj\Debug\netcoreapp2.1\petShop.Core.Entity.pdb
+C:\Users\jacob\Desktop\PetShop\petShop.Core.Entity\obj\Debug\netcoreapp2.1\petShop.Core.Entity.csprojAssemblyReference.cache

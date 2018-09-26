@@ -21,9 +21,10 @@ namespace PetShopAPI.Controllers
 
 
         [HttpGet]
-        public ActionResult<IEnumerable<Pet>> Get()
+        public ActionResult<IEnumerable<Pet>> Get([FromQuery]Filter filter)
         {
-            return _petService.GetAllPet();
+           
+            return _petService.GetFilteredPet(filter);
         }
         
 
@@ -44,16 +45,18 @@ namespace PetShopAPI.Controllers
             }
             return _petService.AddPet(pet);
         }
-        
+
         [HttpPut("{id}")]
-        public void Put( [FromBody] Pet pet)
+        public ActionResult<Pet> Put(int id,[FromBody] Pet pet)
         {
-            var petToUpdate = _petService.UpdatePet(pet);
-            petToUpdate.Name = pet.Name;
-            petToUpdate.Price = pet.Price;
-            petToUpdate.PreviousOwner = pet.PreviousOwner;
-                }
-        
+            if (id < 1 || id != pet.ID)
+            {
+                return BadRequest("Parameter Id and pet ID must be the same");
+            }
+
+            return Ok(_petService.UpdatePet(pet));
+        }
+
 
         [HttpDelete("{id}")]
         public void Delete(int id)

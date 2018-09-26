@@ -1,10 +1,12 @@
 ﻿using Microsoft.Extensions.DependencyInjection;
 using CustomerApp.Core.DomainService;
-using PetApp.Infrastructure;
+
 using CustomerApp.Core.ApplicationService.Services;
 using CustomerApp.Core.ApplicationService;
-using PetApp.Infrastructure.Repository;
 using System;
+using PetApp.Infrastructure;
+using PetApp.Infrastructure.Repository;
+using PetApp.Infrastructure.SQLRepositorie;
 
 namespace PetShop
 {
@@ -15,12 +17,10 @@ namespace PetShop
             FAKEDB.InitData();
 
             var service = new ServiceCollection();
-            service.AddScoped<IPetRepository1, PetRepository>();
+            service.AddScoped<IPetRepository1, SQLPetRepository>();
             service.AddScoped<IPetService, PetService>();
 
-           
-            
-            service.AddScoped<IOwnerRepository, OwnerRepository>();
+            service.AddScoped<IOwnerRepository, SQLOwnerRepository>();
             service.AddScoped<IOwnerService, OwnerService>();
             var serviceProviderpet = service.BuildServiceProvider();
             var petService = serviceProviderpet.GetRequiredService<IPetService>();

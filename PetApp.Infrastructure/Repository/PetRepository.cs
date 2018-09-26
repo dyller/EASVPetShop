@@ -1,4 +1,5 @@
 ﻿using CustomerApp.Core.DomainService;
+using Microsoft.EntityFrameworkCore;
 using PetApp.Infrastructure.Repository;
 using petShop.Core.Entity;
 using System;
@@ -10,36 +11,54 @@ namespace PetApp.Infrastructure
     public class PetRepository: IPetRepository1
 
     {
-       
-        private List<Pet> _pet = FAKEDB.pet.ToList();
 
-        
-        public Pet Create(Pet pet)
+
+        readonly PetShopAppContext _ctx;
+
+        public PetRepository(PetShopAppContext ctx)
         {
-            pet.ID = FAKEDB.PetId++;
-            _pet.Add(pet);
-            return pet;
+            _ctx = ctx;
         }
 
-        public Pet Delete(int id)
+        public int Count()
+        {
+            throw new NotImplementedException();
+        }
+
+        public Pet Create(Pet pet)
+        {
+
+            pet.ID = FAKEDB.PetId++;
+            var petList = FAKEDB.pet.ToList();
+             petList.Add(pet);
+            FAKEDB.pet = petList;
+           return pet;
+        }
+
+        public void Delete(int id)
         {
             var PetFound = this.ReadyById(id);
             if (PetFound != null)
             {
-                _pet.Remove(PetFound);
-                return PetFound;
+            var petList = FAKEDB.pet.ToList();
+            petList.Remove(PetFound);
+            FAKEDB.pet = petList;
             }
-            return null;
-        }
 
+        }
         public IEnumerable<Pet> ReadAll()
         {
-            return _pet;
+            return FAKEDB.pet.ToList();
+        }
+
+        public IEnumerable<Pet> ReadAll(Filter filter = null)
+        {
+            throw new NotImplementedException();
         }
 
         public Pet ReadyById(int id)
         {
-            foreach (var pet in _pet)
+            foreach (var pet in FAKEDB.pet.ToList())
             {
                 if (pet.ID == id)
                 {
@@ -51,20 +70,18 @@ namespace PetApp.Infrastructure
 
         public Pet Update(Pet petUpdate)
         {
-            var PetFromDB = this.ReadyById(petUpdate.ID);
-            if (PetFromDB != null)
-            {
 
-                PetFromDB.Name = petUpdate.Name;
-                PetFromDB.Color = petUpdate.Color;
-                PetFromDB.Birthdate = petUpdate.Birthdate;
-                PetFromDB.PreviousOwner = petUpdate.PreviousOwner;
-                PetFromDB.Price = petUpdate.Price;
-                PetFromDB.SoldDate = petUpdate.SoldDate;
-                PetFromDB.Type = petUpdate.Type;
-                return PetFromDB;
-            }
-            return null;
+            _ctx.Attach(petUpdate).State = EntityState.Modified;
+            _ctx.Entry(petUpdate).Reference(o => o.PreviousOwner).IsModified = true;
+            _ctx.SaveChanges();
+            return petUpdate;
+        }
+
+        Pet IPetRepository1.Delete(int id)
+        {
+            throw new NotImplementedException();
         }
     }
-}
+
+       
+    }

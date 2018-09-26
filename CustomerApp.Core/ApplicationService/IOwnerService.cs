@@ -15,6 +15,6 @@ namespace CustomerApp.Core.ApplicationService
 
         Owner UpdateOwner(Owner UpdateOwner);
 
-        Owner DeleteOwner(int id);
+        void DeleteOwner(int id);
     }
 }

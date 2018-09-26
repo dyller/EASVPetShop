@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Text;
 using CustomerApp.Core.DomainService;
@@ -10,31 +11,30 @@ namespace CustomerApp.Core.ApplicationService.Services
  public   class PetService : IPetService
     {
         readonly IPetRepository1 _PetRepo;
-
-        public PetService(IPetRepository1 PetRepo)
+        readonly IOwnerRepository _OwnerRepo;
+        public PetService(IPetRepository1 PetRepo, IOwnerRepository OwnerRepo)
         {
             _PetRepo = PetRepo;
+            _OwnerRepo = OwnerRepo;
         }
         public Pet AddPet(Pet pet)
         {
+               if(pet.PreviousOwner == null || pet.PreviousOwner.Id <= 0)
+                throw new InvalidDataException("To create Order you need a Customer");
+            if(_OwnerRepo.ReadyById(pet.PreviousOwner.Id) == null)
+                throw new InvalidDataException("Customer Not found");
+
             return _PetRepo.Create(pet);
         }
 
-        public Pet DeletePet(int id)
+        public void DeletePet(int id)
         {
-            return _PetRepo.Delete(id);
+             _PetRepo.Delete(id);
         }
 
         public Pet FindPetById(int id)
         {
-            foreach (var item in _PetRepo.ReadAll())
-            {
-                if (item.ID == id)
-                {
-                    return item;
-                        }
-            }
-            return null;
+            return _PetRepo.ReadyById(id);
 
         }
 
@@ -44,17 +44,25 @@ namespace CustomerApp.Core.ApplicationService.Services
 
         }
 
+        public List<Pet> GetFilteredPet(Filter filter)
+        {
+            if (filter.CurrentPage <= 0 || filter.ItemsPrPage <= 0)
+            {
+                throw new InvalidDataException("CurrentPage and ItemsPage Must zero or more");
+            }
+            if ((filter.CurrentPage - 1 * filter.ItemsPrPage) >= _PetRepo.Count())
+            {
+                throw new InvalidDataException("Index out bounds, CurrentPage is to high");
+            }
+
+            return _PetRepo.ReadAll(filter).ToList();
+        }
+
         public Pet UpdatePet(Pet UpdatePet)
         {
-            var pet = FindPetById(UpdatePet.ID);
-            pet.Name = UpdatePet.Name;
-            pet.Color = UpdatePet.Color;
-            pet.Birthdate = UpdatePet.Birthdate;
-            pet.PreviousOwner = UpdatePet.PreviousOwner;
-            pet.Price = UpdatePet.Price;
-            pet.SoldDate = UpdatePet.SoldDate;
-            pet.Type = UpdatePet.Type;
-            return pet;
+
+
+            return _PetRepo.Update(UpdatePet); 
         }
     }
 }

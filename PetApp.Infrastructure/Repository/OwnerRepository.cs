@@ -19,7 +19,7 @@ namespace PetApp.Infrastructure.Repository
             return owner;
         }
 
-        public Owner Delete(int id)
+        public void Delete(int id)
         {
             var OwnerFound = this.ReadyById(id);
             if (OwnerFound != null)
@@ -28,9 +28,7 @@ namespace PetApp.Infrastructure.Repository
                 ownerList.Add(OwnerFound);
                 ownerList.Remove(OwnerFound);
                 FAKEDB.owner = ownerList;
-                return OwnerFound;
             }
-            return null;
         }
 
         public IEnumerable<Owner> ReadAll()
@@ -67,6 +65,11 @@ namespace PetApp.Infrastructure.Repository
                 return OwnerFromDB;
             }
             return null;
+        }
+
+        Owner IOwnerRepository.Delete(int id)
+        {
+            throw new NotImplementedException();
         }
     }
 }

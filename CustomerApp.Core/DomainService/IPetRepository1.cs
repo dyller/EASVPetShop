@@ -9,12 +9,12 @@ namespace CustomerApp.Core.DomainService
     {
         
         Pet Create(Pet pet);
-        
-
+         Pet ReadyById(int id);
         IEnumerable<Pet> ReadAll();
 
         Pet Update(Pet petUpdate);
-
+        IEnumerable<Pet> ReadAll(Filter filter = null);
+        int Count();
         Pet Delete(int id);
     }
 }

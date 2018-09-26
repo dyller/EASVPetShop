@@ -21,9 +21,9 @@ namespace CustomerApp.Core.ApplicationService.Services
             return _ownerRepo.Create(owner);
         }
 
-        public Owner DeleteOwner(int id)
+        public void DeleteOwner(int id)
         {
-            return _ownerRepo.Delete(id);
+             _ownerRepo.Delete(id);
         }
 
         public Owner FindOwnerById(int id)
@@ -38,9 +38,8 @@ namespace CustomerApp.Core.ApplicationService.Services
 
         public Owner UpdateOwner(Owner UpdateOwner)
         {
-            var owner = FindOwnerById(UpdateOwner.Id);
-
-            return owner;
+        
+            return _ownerRepo.Update(UpdateOwner);
         }
     }
 }
