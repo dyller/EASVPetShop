@@ -19,7 +19,9 @@ namespace PetApp.Infrastructure
                             .WithMany( c=> c.pets)
                 .OnDelete(DeleteBehavior.SetNull);
         }
+
         public DbSet<Owner> Owner { get; set; }
         public DbSet<Pet> Pet { get; set; }
+        public DbSet<User> Users { get; set; }
     }
 }

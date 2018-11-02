@@ -16,4 +16,8 @@
     <ProjectReference Include="..\petShop.Core.Entity\petShop.Core.Entity.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="Helper%27\" />
+  </ItemGroup>
+
 </Project>
