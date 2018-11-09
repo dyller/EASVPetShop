@@ -22,6 +22,8 @@ namespace PetApp.Infrastructure
 
         public DbSet<Owner> Owner { get; set; }
         public DbSet<Pet> Pet { get; set; }
+
+        public DbSet<TodoItem> TodoItems { get; set; }
         public DbSet<User> Users { get; set; }
     }
 }

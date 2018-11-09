@@ -1,26 +1,23 @@
-﻿using System;
+﻿using CustomerApp.Core.DomainService;
+using Microsoft.AspNetCore.Mvc;
+using Microsoft.IdentityModel.Tokens;
+using petShop.Core.Entity;
+using PetShopAPI.Helper;
+using System;
 using System.Collections.Generic;
 using System.IdentityModel.Tokens.Jwt;
 using System.Linq;
 using System.Security.Claims;
 using System.Threading.Tasks;
-using CustomerApp.Core.ApplicationService;
-using CustomerApp.Core.DomainService;
-using Microsoft.AspNetCore.Http;
-using Microsoft.AspNetCore.Mvc;
-using Microsoft.IdentityModel.Tokens;
-using petShop.Core.Entity;
-using PetShopAPI.Helper;
 
 namespace PetShopAPI.Controllers
 {
-    [Route("api/[controller]")]
-    [ApiController]
-    public class UserController : Controller
+    [Route("/token")]
+    public class TokenController : Controller
     {
         private readonly IUserRepository<User> repository;
 
-        public UserController(IUserRepository<User> repos, IPetService petService)
+        public TokenController(IUserRepository<User> repos)
         {
             repository = repos;
         }
@@ -29,17 +26,15 @@ namespace PetShopAPI.Controllers
         [HttpPost]
         public IActionResult Login([FromBody]UserInput model)
         {
-
             var user = repository.GetAll().FirstOrDefault(u => u.Username == model.Username);
 
             // check if username exists
             if (user == null)
-
-                return BadRequest("Parameter username must be something");
+                return Unauthorized();
 
             // check if password is correct
             if (!VerifyPasswordHash(model.Password, user.PasswordHash, user.PasswordSalt))
-                return BadRequest("Parameter Id and pet ID must be the same");
+                return Unauthorized();
 
             // Authentication successful
             return Ok(new
