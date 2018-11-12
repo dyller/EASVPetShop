@@ -1,16 +1,15 @@
-﻿using CustomerApp.Core.DomainService;
+﻿using System;
+using System.IdentityModel.Tokens.Jwt;
+using System.Security.Claims;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.IdentityModel.Tokens;
-using petShop.Core.Entity;
-using PetShopAPI.Helper;
-using System;
-using System.Collections.Generic;
-using System.IdentityModel.Tokens.Jwt;
 using System.Linq;
-using System.Security.Claims;
-using System.Threading.Tasks;
+using System.Collections.Generic;
+using petShop.Core.Entity;
+using CustomerApp.Core.DomainService;
+using PetShopAPI.Helper;
 
-namespace PetShopAPI.Controllers
+namespace TodoApi.Controllers
 {
     [Route("/token")]
     public class TokenController : Controller
