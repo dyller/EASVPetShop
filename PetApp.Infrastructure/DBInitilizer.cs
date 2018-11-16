@@ -17,10 +17,10 @@ namespace PetApp.Infrastructure
             context.Database.EnsureCreated();
 
             // Look for any TodoItems
-            if (context.TodoItems.Any())
-            {
-                return;   // DB has been seeded
-            }
+            //if (context.TodoItems.Any())
+            //{
+            //    return;   // DB has been seeded
+            //}
 
             List<TodoItem> items = new List<TodoItem>
             {
