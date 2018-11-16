@@ -49,15 +49,10 @@ namespace PetApp.Infrastructure
                     IsAdmin = true
                 }
             };
-            foreach (var item in items)
-            {
-                context.TodoItems.Add(item);
-            }
-            foreach (var item in users)
-            {
-                context.Users.Add(item);
-            }
-            context.SaveChanges(); 
+
+            context.TodoItems.AddRange(items);
+            context.Users.AddRange(users);
+            context.SaveChanges();
         }
         private static void CreatePasswordHash(string password, out byte[] passwordHash, out byte[] passwordSalt)
         {
