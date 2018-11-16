@@ -20,6 +20,7 @@ namespace PetShopAPI.Controllers
         }
 
         // GET: api/Todo
+        [Authorize]
         [HttpGet]
         public IEnumerable<TodoItem> GetAll()
         {
