@@ -118,7 +118,6 @@ namespace PetShopAPI
                 {
                     var ctx = scope.ServiceProvider.GetService<PetShopAppContext>();
                     ctx.Database.EnsureCreated();
-                    DBInitilizer.SeedDB(ctx);
                 }
                 app.UseHsts();
             }
