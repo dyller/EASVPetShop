@@ -9,6 +9,7 @@ using petShop.Core.Entity;
 
 namespace PetShopAPI.Controllers
 {
+    [Produces("application/json")]
     [Route("api/Todo")]
     public class TodoController : Controller
     {
@@ -28,6 +29,7 @@ namespace PetShopAPI.Controllers
         }
 
         // GET: api/Todo/5
+        [Authorize(Roles = "Administrator")]
         [HttpGet("{id}", Name = "Get")]
         public IActionResult Get(long id)
         {
@@ -40,6 +42,7 @@ namespace PetShopAPI.Controllers
         }
 
         // POST: api/Todo
+        [Authorize(Roles = "Administrator")]
         [HttpPost]
         public IActionResult Post([FromBody] TodoItem item)
         {
@@ -54,6 +57,7 @@ namespace PetShopAPI.Controllers
         }
 
         // PUT: api/Todo/5
+        [Authorize(Roles = "Administrator")]
         [HttpPut("{id}")]
         public IActionResult Put(long id, [FromBody] TodoItem item)
         {
@@ -76,6 +80,7 @@ namespace PetShopAPI.Controllers
         }
 
         // DELETE: api/ApiWithActions/5
+        [Authorize(Roles = "Administrator")]
         [HttpDelete("{id}")]
         public IActionResult Delete(long id)
         {
