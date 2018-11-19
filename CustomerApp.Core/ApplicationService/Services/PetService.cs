@@ -21,7 +21,7 @@ namespace CustomerApp.Core.ApplicationService.Services
         {
                if(pet.PreviousOwner == null || pet.PreviousOwner.Id <= 0)
                 throw new InvalidDataException("To create Order you need a Customer");
-            if(_OwnerRepo.ReadyById(pet.PreviousOwner.Id) == null)
+                if(_OwnerRepo.ReadyById(pet.PreviousOwner.Id) == null)
                 throw new InvalidDataException("Customer Not found");
 
             return _PetRepo.Create(pet);

@@ -52,7 +52,18 @@ namespace PetShopAPI
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-            services.AddCors();
+            services.AddCors(options =>
+            {
+                options.AddPolicy("AllowSpecificOrigin",
+                    builder => builder.WithOrigins("http://localhost:4200").AllowAnyHeader()
+                        .AllowAnyMethod());
+                options.AddPolicy("AllowSpecificOrigin",
+                    builder => builder.WithOrigins("https://petshop-684d3.firebaseapp.com").AllowAnyHeader()
+                        .AllowAnyMethod());
+                options.AddPolicy("AllowSpecificOrigin",
+                    builder => builder.WithOrigins("https://localhost:44332").AllowAnyHeader()
+                      .AllowAnyMethod());
+            });
             /*services.AddDbContext<CustomerAppContext>(
                 opt => opt.UseInMemoryDatabase("ThaDB")
                 );*/
@@ -81,7 +92,7 @@ namespace PetShopAPI
             {
                 services.AddDbContext<PetShopAppContext>(
                     opt => opt
-                        .UseSqlServer(_conf.GetConnectionString("hey")));
+                        .UseSqlServer(_conf.GetConnectionString("defaultConnection")));
             }
 
             services.AddScoped<IOwnerRepository, SQLOwnerRepository>();
