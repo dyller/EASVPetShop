@@ -55,7 +55,7 @@ namespace PetShopAPI
             services.AddCors(options =>
             {
                 options.AddPolicy("AllowSpecificOrigin",
-                    builder => builder.WithOrigins("http://localhost:4200").AllowAnyHeader()
+                    builder => builder.WithOrigins("http://localhost:4200").AllowAnyHeader().AllowAnyOrigin()
                         .AllowAnyMethod());
                 options.AddPolicy("AllowSpecificOrigin",
                     builder => builder.WithOrigins("https://petshop-684d3.firebaseapp.com").AllowAnyHeader()
